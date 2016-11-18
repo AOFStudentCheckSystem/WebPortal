@@ -17,7 +17,17 @@ module.exports = {
         extensions: ['','.js','.ng','.css','.json','.html'],
         fallback: [path.join(__dirname, 'app/node_modules')]
     },
+    module: {
+        loaders: [{
+            test: /\.css$/,
+            loaders: ['style', 'css']
+        }, {
+            test: /\.html$/,
+            loader: "raw-loader" // loaders: ['raw-loader'] is also perfectly acceptable.
+        }]
+    },
     devServer: {
-        inline: true
+        contentBase: 'dist',
+        hot: true
     }
 }
