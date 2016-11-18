@@ -23,4 +23,5 @@ crashlytics-build.properties
 fabric.properties
 libs
 *.iml
-dist
+dist/*
+*.log
