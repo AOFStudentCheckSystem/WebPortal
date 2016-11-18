@@ -1,0 +1,24 @@
+{
+  "name": "webportal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --content-base app --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AOFStudentCheckSystem/WebPortal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AOFStudentCheckSystem/WebPortal/issues"
+  },
+  "homepage": "https://github.com/AOFStudentCheckSystem/WebPortal#readme",
+  "devDependencies": {
+    "path": "^0.12.7",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
+  }
+}
