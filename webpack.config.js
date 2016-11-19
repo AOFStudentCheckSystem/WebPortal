@@ -13,7 +13,7 @@ module.exports = {
     resolve: {
         alias: {
             'controllers': path.join(__dirname, 'app/src/components/controllers'),
-            'templates': path.join(__dirname, 'app/src/components/templates'),
+            'views': path.join(__dirname, 'app/src/components/views'),
             'styles': path.join(__dirname, 'app/src/styles'),
             'src': path.join(__dirname, 'app/src')
         },
@@ -25,7 +25,7 @@ module.exports = {
             test: /\.css$/,
             loaders: ['style', 'css']
         }, {
-            test: /\.html$/,
+            test: /\.(ng|html|htm)(\?.*)?$/,
             loader: "raw-loader" // loaders: ['raw-loader'] is also perfectly acceptable.
         },
         {
