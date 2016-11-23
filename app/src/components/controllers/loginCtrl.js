@@ -1,3 +1,5 @@
-export function controller($scope, $state) {
-    $scope.test = "Test"
+export function controller($scope, $state, $http, userdata) {
+    $scope.login = function () {
+
+    }
 }
