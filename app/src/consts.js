@@ -1,0 +1,1 @@
+export const rootURL = "http://hn2.guardiantech.com.cn:10492"

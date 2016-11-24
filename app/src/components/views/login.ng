@@ -32,7 +32,7 @@
             </div>
             <div class="panel-body">
                 <form ng-submit="login()" name="loginForm">
-                    <input type="email" id="username" class="form-control" ng-model="username" placeholder="email">
+                    <input type="text" id="username" class="form-control" ng-model="username" placeholder="email">
                     <br>
                     <input type="password" id="password" class="form-control" ng-model="password" placeholder="password">
                     <br>

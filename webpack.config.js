@@ -1,7 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
     entry: {
         build: path.join(__dirname, 'app/src/app.js')
@@ -67,7 +68,19 @@ module.exports = {
             inject: true,
             template: 'app/src/index.html'
         }),
-        new ExtractTextPlugin("style.css")
+        new ExtractTextPlugin("style.css"),
+        new CopyWebpackPlugin([{
+            from: "node_modules/jquery/dist/jquery.js"
+        }, {
+            from: "app/src/components/zui/js/zui.js"
+        }],{
+            ignore: [
+                // Doesn't copy any files with a txt extension
+                '*.txt',
+                '*.md'
+            ]
+        })
+
     ],
     externals: {"bundle!jquery": "bundledJQuery"}
 }

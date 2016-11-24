@@ -1,6 +1,6 @@
 const angular = require("angular")
-const $ = require("jquery")
 const uiRouter = require("angular-ui-router")
+const rootUrl = require("src/consts.js").rootURL
 
 import 'src/components/zui/css/zui.css'
 
@@ -38,20 +38,42 @@ const app = angular.module("AOFPortal",[uiRouter],function ($httpProvider) {
         return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
     }];
 });
+app.factory("userdata", function ($http) {
+    let data = {};
+    return {
+        getSession:function () {
+            return window.localStorage.getItem("session")
+        },
+        setSession: function (sessionKey) {
+            window.localStorage.setItem("session",sessionKey)
+        },
+        hasSession: function () {
+            return (window.localStorage.getItem("session") != null)
+        },
+        isAlive : function () {
+            return $http.post(rootUrl+"/web/auth/verify")
+        },
+        setUsername: function (username) {
+            data.username = username
+        },
+        getUsername: function () {
+            return data.username
+        }
+    };
+});
 app.factory('httpInterceptor', ['$q', '$injector', function ($q, $injector) {
     return {
         'responseError': function (response) {
-            if (response.status == 401) {
-                window.localStorage.clear();
-                window.location.href = "/";
-            }
             return $q.reject(response);
         },
         'response': function (response) {
             return response;
         },
         'request': function (config) {
-            return config;
+            if (window.localStorage.getItem("session") != null) {
+                config.headers['Authorization'] = window.localStorage.getItem("session")
+            }
+            return config
         },
         'requestError': function (config) {
             return $q.reject(config);
@@ -61,17 +83,7 @@ app.factory('httpInterceptor', ['$q', '$injector', function ($q, $injector) {
 app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');
 }]);
-app.factory("userdata", function ($http) {
-    let data = {};
-    return {
-        getSession:function () {
-            return window.localStorage.getItem("session")
-        },
-        setSession: function (sessionKey) {
-            window.localStorage.setItem("session",sessionKey)
-        }
-    };
-});
+
 app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.when('','/index')
     $urlRouterProvider.when('/','/index')
